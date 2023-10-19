@@ -1,7 +1,7 @@
 export interface TypeInterface {
   title: string;
   post: string;
-  tags: TypeTags[];
+  tag: TypeTags[];
 }
 
 export interface TypeTags {
