@@ -35,16 +35,21 @@ export default function CreateBlog() {
 
         <textarea
           className="textarea textarea-bordered w-full max-w-lg"
-          placeholder="Bio"
-          {...register("post", { required: true })}
+          placeholder="content"
+          {...register("content", { required: true })}
         ></textarea>
 
-        <select className="input input-bordered w-full max-w-lg">
-          <option disabled selected>
-            Who shot first?
+        <select
+          className="input select-bordered w-full max-w-lg"
+          {...register("tag", { required: true })}
+          defaultValue=""
+        >
+          <option disabled value="">
+            Select tags
           </option>
-          <option>Han Solo</option>
-          <option>Greedo</option>
+          <option>Javascript</option>
+          <option>PHP</option>
+          <option>Python</option>
         </select>
         <button type="submit" className="btn">
           Create

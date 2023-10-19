@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import profilePic from "/public/myimg.jpeg";
 import Link from "next/link";
+import { Slack } from "lucide-react";
 
 export default function Navbar() {
   return (
@@ -14,6 +15,7 @@ export default function Navbar() {
             className="btn btn-ghost normal-case text-xl text-teal-900"
           >
             blog-post
+            <Slack size={40} strokeWidth={1} />
           </Link>
         </div>
         <div className="flex flex-wrap gap-2">
