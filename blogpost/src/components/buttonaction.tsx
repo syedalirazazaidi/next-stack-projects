@@ -7,7 +7,7 @@ export default function ButtonAction() {
     <div className="flex gap-4">
       <Link
         className="bg-green-900 btn text-yellow-50 hover:bg-green-800 rounded-lg"
-        href="/edit/id"
+        href="/edit/1"
       >
         Edit
         <Pencil />
