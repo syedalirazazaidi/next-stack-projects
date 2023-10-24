@@ -1,12 +1,15 @@
 "use client";
-import React from "react";
+import React, { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { TypeInterface } from "../../types/type";
-
-export default function PostBlog({ Submitform }: any) {
+interface FormPostProps {
+  Submitform: SubmitHandler<TypeInterface>;
+  Edit: boolean;
+}
+export default function PostBlog({ Submitform, Edit }: FormPostProps) {
   const router = useRouter();
 
   const {
@@ -19,13 +22,17 @@ export default function PostBlog({ Submitform }: any) {
 
   return (
     <>
-      <div>
+      <div className="container p-8">
         <button className="btn" onClick={() => router.push("/")}>
           {" "}
           <ChevronLeft /> Back
         </button>
       </div>
+
       <form onSubmit={handleSubmit(Submitform)}>
+        <div className="flex -mb-16 font-extrabold justify-center">
+          {Edit && "EDIT POST"}
+        </div>
         <div className="grid grid-cols gap-4   place-content-center my-36">
           <input
             type="text"
@@ -53,7 +60,7 @@ export default function PostBlog({ Submitform }: any) {
             <option>Python</option>
           </select>
           <button type="submit" className="btn">
-            Create
+            {!Edit ? "CREATE" : "EDIT"}
           </button>
         </div>
       </form>

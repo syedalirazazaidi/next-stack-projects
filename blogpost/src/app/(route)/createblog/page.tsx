@@ -9,7 +9,7 @@ export default function CreateBlog() {
 
   return (
     <div>
-      <PostBlog Submitform={onSubmit} />
+      <PostBlog Submitform={onSubmit} Edit={false} />
     </div>
   );
 }
