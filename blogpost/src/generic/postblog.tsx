@@ -31,7 +31,7 @@ export default function PostBlog({ Submitform, Edit }: FormPostProps) {
 
       <form onSubmit={handleSubmit(Submitform)}>
         <div className="flex -mb-16 font-extrabold justify-center">
-          {Edit && "EDIT POST"}
+          {Edit ? "EDIT POST" : "CREATE POST"}
         </div>
         <div className="grid grid-cols gap-4   place-content-center my-36">
           <input
@@ -60,7 +60,7 @@ export default function PostBlog({ Submitform, Edit }: FormPostProps) {
             <option>Python</option>
           </select>
           <button type="submit" className="btn">
-            {!Edit ? "CREATE" : "EDIT"}
+            {!Edit ? "CREATE" : "UPDATE"}
           </button>
         </div>
       </form>
