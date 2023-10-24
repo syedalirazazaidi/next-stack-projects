@@ -23,7 +23,7 @@ export default function PostBlog({ Submitform, Edit }: FormPostProps) {
   return (
     <>
       <div className="container p-8">
-        <button className="btn" onClick={() => router.push("/")}>
+        <button className="btn" onClick={() => router.back()}>
           {" "}
           <ChevronLeft /> Back
         </button>
