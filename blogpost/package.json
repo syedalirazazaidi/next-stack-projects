@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^5.5.0",
     "lucide": "^0.288.0",
     "lucide-react": "^0.288.0",
+    "mongodb": "^6.2.0",
     "next": "13.5.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -25,6 +27,7 @@
     "eslint": "^8",
     "eslint-config-next": "13.5.5",
     "postcss": "^8",
+    "prisma": "^5.5.0",
     "tailwindcss": "^3",
     "typescript": "^5"
   }
