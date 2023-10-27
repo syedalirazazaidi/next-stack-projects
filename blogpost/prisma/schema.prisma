@@ -14,8 +14,14 @@ model Post {
   description String?
   createdDate DateTime @default(now())
   updatedDate DateTime @updatedAt
-  // address Address?
-  // posts   Post[]
+  tag         Tag?     @relation(fields: [tagId], references: [id])
+  tagId       String?  @db.ObjectId
+}
+
+model Tag {
+  id   String  @id @default(auto()) @map("_id") @db.ObjectId
+  name String?
+  Post Post[]
 }
 
 // type Address {
