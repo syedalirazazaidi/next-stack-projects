@@ -14,7 +14,7 @@ model Post {
   description String?
   createdDate DateTime @default(now())
   updatedDate DateTime @updatedAt
-  tag         Tag?     @relation(fields: [tagId], references: [id])
+  Tag         Tag?     @relation(fields: [tagId], references: [id])
   tagId       String?  @db.ObjectId
 }
 

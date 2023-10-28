@@ -1,31 +1,14 @@
-import { connectionDB } from "@/utils";
+import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
 
-export async function GET(request: Request, res: NextResponse) {
+export async function GET() {
   try {
-    await connectionDB();
-    const posts = await prisma.post.findMany();
-    return NextResponse.json({ message: "success", posts }, { status: 200 });
-  } catch (err) {
-    return NextResponse.json({ message: "Error", err }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();
-  }
-}
-
-export async function POST(request: Request, res: NextResponse) {
-  try {
-    const { title, description } = await request.json();
-    await connectionDB();
-    const postall = await prisma.post.create({
-      data: { title: "Alice", description: "a software engineer" },
-    });
-    return NextResponse.json({ message: "success", postall }, { status: 200 });
-  } catch (err) {
-    return NextResponse.json({ message: "Error", err }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();
+    const tags = await db.post.findMany();
+    return NextResponse.json(tags, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "could not fetch tags" },
+      { status: 500 }
+    );
   }
 }

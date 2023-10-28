@@ -1,7 +1,18 @@
+import { db } from "@/lib/db";
 import Link from "next/link";
 import React from "react";
 
-export default function AllBlog() {
+async function getPosts() {
+  const response = await db.post.findMany();
+  return response;
+}
+
+
+
+export default async function AllBlog() {
+  const posts = await getPosts();
+  console.log(posts);
+
   return (
     <div className="grid grid-cols-1  md:grid-cols-3 gap-4 mt-10">
       <div className="card w-80 md:w-96 bg-base-100 shadow-xl">
