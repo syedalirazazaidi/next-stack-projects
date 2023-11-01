@@ -7,8 +7,6 @@ async function getPosts() {
   return response;
 }
 
-
-
 export default async function AllBlog() {
   const posts = await getPosts();
   console.log(posts);
