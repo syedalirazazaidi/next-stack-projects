@@ -1,16 +1,41 @@
-"use client";
 import React from "react";
 import ButtonAction from "@/components/buttonaction";
 import Backbutton from "../../../../components/backbutton";
+import { db } from "@/lib/db";
 
-export default function BlogDetails() {
+interface BlogDetailsProps {
+  params: {
+    id: string;
+  };
+}
+async function getPosts(id: string) {
+  const response = await db.post.findFirst({
+    where: {
+      id: id,
+    },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      tag: true,
+    },
+  });
+  return response;
+}
+
+export default async function BlogDetails({ params }: BlogDetailsProps) {
+  const post = await getPosts(params.id);
+
   return (
     <>
       <Backbutton />
-      <div className="container">
-        <h2>post One</h2>
+      <div className="container ">
+        <div className="card-body bg-gray-300 rounded-md my-10">
+          <h2>{post?.title}</h2>
+          <h2>{post?.description}</h2>
+        </div>
+
         <ButtonAction />
-        <p className="text-slate-700">Post one content</p>
       </div>
     </>
   );

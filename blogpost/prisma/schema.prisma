@@ -24,9 +24,3 @@ model Tag {
   Post Post[]
 }
 
-// type Address {
-//   street String
-//   city   String
-//   state  String
-//   zip    String
-// }

@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Tag } from "@prisma/client";
 interface FormPostProps {
-  Submitform: SubmitHandler<TypeInterface>;
+  Submitform: SubmitHandler<any>;
   Edit: boolean;
 }
 
