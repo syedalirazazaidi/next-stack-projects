@@ -1,6 +1,6 @@
-export interface TypeInterface {
+export interface FormType {
   title: string;
-  content: string;
+  description: string;
   tag: string;
 }
 

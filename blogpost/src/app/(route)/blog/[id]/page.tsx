@@ -30,11 +30,11 @@ export default async function BlogDetails({ params }: BlogDetailsProps) {
     <>
       <Backbutton />
       <div className="container ">
-        <div className="card-body bg-gray-300 rounded-md my-10">
+        <div className="card-body bg-gray-300 rounded-md my-10 font-semibold">
           <h2>{post?.title}</h2>
           <h2>{post?.description}</h2>
+          <h2>{post?.tag?.name}</h2>
         </div>
-
         <ButtonAction />
       </div>
     </>

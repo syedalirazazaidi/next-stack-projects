@@ -1,15 +1,14 @@
 "use client";
 import React, { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import Link from "next/link";
 import { ChevronLeft, Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { TypeInterface } from "../../types/type";
-import { useQuery } from "@tanstack/react-query";
+import { FormType } from "../../types/type";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Tag } from "@prisma/client";
 interface FormPostProps {
-  Submitform: SubmitHandler<any>;
+  submit: SubmitHandler<FormType>;
   Edit: boolean;
 }
 
@@ -17,7 +16,7 @@ interface TagType {
   id: string;
   name: string;
 }
-export default function PostBlog({ Submitform, Edit }: FormPostProps) {
+export default function PostBlog({ submit, Edit }: FormPostProps) {
   const router = useRouter();
 
   const {
@@ -25,8 +24,8 @@ export default function PostBlog({ Submitform, Edit }: FormPostProps) {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<TypeInterface>();
-  //   const onSubmit: SubmitHandler<TypeInterface> = (data) => console.log(data);
+  } = useForm<FormType>();
+  const onSubmit: SubmitHandler<FormType> = (data) => console.log(data);
 
   const {
     data: dataTags,
@@ -41,6 +40,18 @@ export default function PostBlog({ Submitform, Edit }: FormPostProps) {
     },
   });
 
+  const { mutate: createPost, isPending } = useMutation({
+    mutationFn: (newpost: FormType) => {
+      return axios.post("/api/post/create", newpost);
+    },
+    onError: () => {
+      console.log(error);
+    },
+    onSuccess: () => {
+      router.push("/");
+    },
+  });
+
   return (
     <>
       <div className="container p-8">
@@ -50,7 +61,7 @@ export default function PostBlog({ Submitform, Edit }: FormPostProps) {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit(Submitform)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex -mb-16 font-extrabold justify-center">
           {Edit ? "EDIT POST" : "CREATE POST"}
         </div>
@@ -64,8 +75,8 @@ export default function PostBlog({ Submitform, Edit }: FormPostProps) {
 
           <textarea
             className="textarea textarea-bordered w-full max-w-lg"
-            placeholder="content"
-            {...register("content", { required: true })}
+            placeholder="description"
+            {...register("description", { required: true })}
           ></textarea>
 
           {isLoading ? (
