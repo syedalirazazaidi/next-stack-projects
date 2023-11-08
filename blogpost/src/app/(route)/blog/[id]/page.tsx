@@ -33,7 +33,7 @@ export default async function BlogDetails({ params }: BlogDetailsProps) {
         <div className="card-body bg-gray-300 rounded-md my-10 font-semibold">
           <h2>{post?.title}</h2>
           <h2>{post?.description}</h2>
-          <h2>{post?.tag?.name}</h2>
+          <h2 className="badge bg-teal-200">{post?.tag?.name}</h2>
         </div>
         <ButtonAction />
       </div>

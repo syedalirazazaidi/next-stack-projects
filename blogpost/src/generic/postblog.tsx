@@ -7,6 +7,7 @@ import { FormType } from "../../types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Tag } from "@prisma/client";
+import { create } from "domain";
 interface FormPostProps {
   submit: SubmitHandler<FormType>;
   Edit: boolean;
@@ -25,7 +26,9 @@ export default function PostBlog({ submit, Edit }: FormPostProps) {
     watch,
     formState: { errors },
   } = useForm<FormType>();
-  const onSubmit: SubmitHandler<FormType> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormType> = (data) => {
+    createPost(data);
+  };
 
   const {
     data: dataTags,
@@ -41,10 +44,10 @@ export default function PostBlog({ submit, Edit }: FormPostProps) {
   });
 
   const { mutate: createPost, isPending } = useMutation({
-    mutationFn: (newpost: FormType) => {
-      return axios.post("/api/post/create", newpost);
+    mutationFn: async (newpost: FormType) => {
+      return await axios.post("/api/post/create", newpost);
     },
-    onError: () => {
+    onError: (error) => {
       console.log(error);
     },
     onSuccess: () => {
@@ -65,11 +68,11 @@ export default function PostBlog({ submit, Edit }: FormPostProps) {
         <div className="flex -mb-16 font-extrabold justify-center">
           {Edit ? "EDIT POST" : "CREATE POST"}
         </div>
-        <div className="grid grid-cols gap-4   place-content-center my-36">
+        <div className="grid  grid-cols gap-4 	  place-content-center my-36">
           <input
             type="text"
             placeholder="Post title"
-            className="input input-bordered w-[450px] "
+            className="input input-bordered w-[300px]  md:w-[450px] "
             {...register("title", { required: true })}
           />
 
