@@ -20,13 +20,12 @@ async function getPosts() {
 export default async function AllBlog() {
   const posts = await getPosts();
   const renderPost = posts?.map(({ id, title, description, tag }) => {
-    const { name } = tag ?? "developer";
     return (
       <div className="card w-80 md:w-96 bg-base-100 shadow-xl" key={id}>
         <div className="card-body">
           <h2 className="card-title text-red-700">{title}</h2>
           <p className="text-start text-gray-500">{description}</p>
-          <span className="badge bg-teal-200">{name}</span>
+          <span className="badge bg-teal-200">{tag?.name}</span>
           <div className="card-actions justify-end">
             <Link href={`/blog/${id}`} className="hover:underline">
               Read more ...
