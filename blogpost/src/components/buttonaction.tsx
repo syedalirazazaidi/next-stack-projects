@@ -1,8 +1,27 @@
+"use client";
+import axios from "axios";
 import { Pencil, Trash } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { FormType } from "../../types/type";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
-export default function ButtonAction() {
+export default function ButtonAction({ id }: { id: string }) {
+  const router = useRouter();
+
+  const { mutate: deletepost } = useMutation({
+    mutationFn: async () => {
+      return await axios.delete(`/api/post/${id}`);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+    onSuccess: () => {
+      router.push("/");
+      router.refresh();
+    },
+  });
   return (
     <div className="flex gap-4">
       <Link
@@ -12,7 +31,7 @@ export default function ButtonAction() {
         Edit
         <Pencil />
       </Link>
-      <button className="btn btn-error">
+      <button onClick={() => deletepost()} className="btn btn-error">
         Delete
         <Trash />
       </button>

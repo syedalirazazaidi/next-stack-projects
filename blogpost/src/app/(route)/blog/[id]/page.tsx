@@ -35,7 +35,7 @@ export default async function BlogDetails({ params }: BlogDetailsProps) {
           <h2>{post?.description}</h2>
           <h2 className="badge bg-teal-200">{post?.tag?.name}</h2>
         </div>
-        <ButtonAction />
+        <ButtonAction id={params.id} />
       </div>
     </>
   );
