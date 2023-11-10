@@ -81,7 +81,7 @@ export default function PostBlog({ submit, Edit }: FormPostProps) {
             className="textarea textarea-bordered w-full max-w-lg"
             placeholder="description"
             {...register("description", { required: true })}
-          ></textarea>
+          />
 
           {isLoading ? (
             <div className="flex justify-center mt-4">
