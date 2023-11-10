@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 export default function ButtonAction({ id }: { id: string }) {
   const router = useRouter();
 
-  const { mutate: deletepost } = useMutation({
+  const { mutate: deletepost, isPending: isLoading } = useMutation({
     mutationFn: async () => {
       return await axios.delete(`/api/post/${id}`);
     },
@@ -32,8 +32,16 @@ export default function ButtonAction({ id }: { id: string }) {
         <Pencil />
       </Link>
       <button onClick={() => deletepost()} className="btn btn-error">
-        Delete
-        <Trash />
+        {isLoading && <span className="loading loading-spinner"></span>}
+        {isLoading ? (
+          "loading"
+        ) : (
+          <>
+            {" "}
+            Delete
+            <Trash />
+          </>
+        )}
       </button>
     </div>
   );
