@@ -52,6 +52,7 @@ export default function PostBlog({ submit, Edit }: FormPostProps) {
     },
     onSuccess: () => {
       router.push("/");
+      router.refresh();
     },
   });
 
@@ -89,7 +90,7 @@ export default function PostBlog({ submit, Edit }: FormPostProps) {
           ) : (
             <select
               className="input select-bordered w-full max-w-lg"
-              {...register("tag", { required: true })}
+              {...register("tagId", { required: true })}
               defaultValue=""
             >
               <option disabled value="">

@@ -8,7 +8,7 @@ export async function POST(req: Request) {
       data: {
         title: body.title,
         description: body.description,
-        tagId: body.tag,
+        tagId: body.tagId,
       },
     });
 

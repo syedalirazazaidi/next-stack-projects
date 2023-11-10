@@ -1,7 +1,7 @@
 export interface FormType {
   title: string;
   description: string;
-  tag: string;
+  tagId: string;
 }
 
 export interface TypeTags {
