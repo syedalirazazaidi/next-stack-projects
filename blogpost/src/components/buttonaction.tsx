@@ -3,7 +3,6 @@ import axios from "axios";
 import { Pencil, Trash } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { FormType } from "../../types/type";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
@@ -26,7 +25,7 @@ export default function ButtonAction({ id }: { id: string }) {
     <div className="flex gap-4">
       <Link
         className="bg-green-900 btn text-yellow-50 hover:bg-green-800 rounded-lg"
-        href="/edit"
+        href={`/edit/${id}`}
       >
         Edit
         <Pencil />
