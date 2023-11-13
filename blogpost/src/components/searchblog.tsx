@@ -22,14 +22,22 @@ export default function Searchblog() {
   //     person.name.toLowerCase().includes(searchTerm.toLowerCase())
   //   );
   return (
-    <div className="mt-10 md:mt-10 ">
-      <input
-        type="text"
-        placeholder="Search"
-        className="input input-bordered  md:w-[400px] "
-        value={searchBlog}
-        onChange={handleSearchChange}
-      />
+    <div className="flex items-center justify-center gap-4">
+      <div className="">
+        <input
+          type="text"
+          placeholder="Search"
+          className="input input-bordered  md:w-[400px] "
+          value={searchBlog}
+          onChange={handleSearchChange}
+        />
+      </div>
+      <div className="join">
+        <button className="join-item btn">1</button>
+        <button className="join-item btn btn-active">2</button>
+        <button className="join-item btn">3</button>
+        <button className="join-item btn">4</button>
+      </div>
     </div>
   );
 }
