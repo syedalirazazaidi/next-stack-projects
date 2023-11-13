@@ -11,13 +11,14 @@ import { create } from "domain";
 interface FormPostProps {
   submit: SubmitHandler<FormType>;
   Edit: boolean;
+  editPost?: FormType;
 }
 
 interface TagType {
   id: string;
   name: string;
 }
-export default function PostBlog({ submit, Edit }: FormPostProps) {
+export default function PostBlog({ submit, Edit, editPost }: FormPostProps) {
   const router = useRouter();
 
   const {
@@ -25,7 +26,7 @@ export default function PostBlog({ submit, Edit }: FormPostProps) {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormType>();
+  } = useForm<FormType>({ defaultValues: editPost });
   const onSubmit: SubmitHandler<FormType> = (data) => {
     createPost(data);
   };
@@ -65,7 +66,7 @@ export default function PostBlog({ submit, Edit }: FormPostProps) {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(submit)}>
         <div className="flex -mb-16 font-extrabold justify-center">
           {Edit ? "EDIT POST" : "CREATE POST"}
         </div>
