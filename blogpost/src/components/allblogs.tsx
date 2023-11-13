@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import Link from "next/link";
 import React from "react";
+import Searchblog from "./searchblog";
 
 async function getPosts() {
   const response = await db.post.findMany({
@@ -17,8 +18,10 @@ async function getPosts() {
   return response;
 }
 
-export default async function AllBlog() {
+export default async function AllBlog({ searchParams }: any) {
   const posts = await getPosts();
+  const query = searchParams?.query || "";
+
   const renderPost = posts?.map(({ id, title, description, tag }) => {
     return (
       <div className="card w-80 md:w-96 bg-base-100 shadow-xl" key={id}>
@@ -37,8 +40,12 @@ export default async function AllBlog() {
   });
 
   return (
-    <div className="flex justify-center flex-wrap text-center items-center gap-3 my-10">
-      {renderPost}
+    <div className="form-control flex flex-1  content-center items-center justify-center">
+      {" "}
+      <Searchblog />
+      <div className="flex justify-center flex-wrap text-center items-center gap-3 my-10">
+        {renderPost}
+      </div>
     </div>
   );
 }

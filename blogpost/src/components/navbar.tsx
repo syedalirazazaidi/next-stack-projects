@@ -19,13 +19,6 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="flex flex-wrap gap-2">
-          <div className="form-control">
-            <input
-              type="text"
-              placeholder="Search"
-              className="input input-bordered w-64 md:w-auto bg-red-100"
-            />
-          </div>
           <Link
             href="/createblog"
             className="btn btn-ghost normal-case text-xl text-teal-900"
