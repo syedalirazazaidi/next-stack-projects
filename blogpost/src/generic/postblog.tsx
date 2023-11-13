@@ -27,9 +27,6 @@ export default function PostBlog({ submit, Edit, editPost }: FormPostProps) {
     watch,
     formState: { errors },
   } = useForm<FormType>({ defaultValues: editPost });
-  const onSubmit: SubmitHandler<FormType> = (data) => {
-    createPost(data);
-  };
 
   const {
     data: dataTags,
@@ -41,19 +38,6 @@ export default function PostBlog({ submit, Edit, editPost }: FormPostProps) {
     queryFn: async () => {
       const response = await axios.get("/api/tags");
       return response.data;
-    },
-  });
-
-  const { mutate: createPost, isPending } = useMutation({
-    mutationFn: async (newpost: FormType) => {
-      return await axios.post("/api/post/create", newpost);
-    },
-    onError: (error) => {
-      console.log(error);
-    },
-    onSuccess: () => {
-      router.push("/");
-      router.refresh();
     },
   });
 
