@@ -3,11 +3,20 @@ import { db } from "@/lib/db";
 import Link from "next/link";
 import React from "react";
 
-async function getPosts(page: number) {
+async function getPosts(page: number, search: any) {
   const totalCount = await db.post.count();
   const response = await db.post.findMany({
     skip: (page - 1) * 6,
     take: 6,
+    where: search
+      ? {
+          OR: [
+            { title: { contains: search, mode: "insensitive" } },
+            { description: { contains: search, mode: "insensitive" } },
+            { tag: { name: { contains: search, mode: "insensitive" } } },
+          ],
+        }
+      : {},
     select: {
       id: true,
       title: true,
@@ -27,9 +36,10 @@ export default async function Blog({
   [key: string]: string | string[] | undefined | any;
 }) {
   const par = parseInt(searchParams?.page ?? 1);
-  const query = searchParams?.query || "";
+  const search = searchParams.search ?? "";
 
-  const posts = await getPosts(par);
+  console.log(searchParams, "%^%^%^%^%^");
+  const posts = await getPosts(par, search);
   const pagesCount = Math.ceil(posts.totalCount / 6);
   const renderPost = posts?.response?.map(({ id, title, description, tag }) => {
     return (
@@ -52,7 +62,7 @@ export default async function Blog({
     <div className="form-control flex flex-1 my-10   content-center items-center justify-center">
       {" "}
       <div className="">
-        <Searchblog totalpage={pagesCount} />
+        <Searchblog totalpage={pagesCount} search={search} />
       </div>
       <div className="flex mt-14 justify-center  flex-wrap text-center items-center gap-3">
         {renderPost}

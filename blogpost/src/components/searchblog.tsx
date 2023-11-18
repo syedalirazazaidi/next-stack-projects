@@ -2,32 +2,37 @@
 import React from "react";
 import Link from "next/link";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { useDebounce } from "use-debounce";
 
-export default function Searchblog({ totalpage }: any) {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
-  function handleSearch(term: string) {
-    const params = new URLSearchParams(searchParams);
-    if (term) {
-      params.set("query", term);
-    } else {
-      params.delete("query");
+export default function Searchblog({ totalpage, search }: any) {
+  const router = useRouter();
+  const initialRender = useRef(true);
+
+  const [text, setText] = useState(search);
+  const [query] = useDebounce(text, 750);
+
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+      return;
     }
 
-    replace(`${pathname}?${params.toString()}`);
-  }
+    if (!query) {
+      router.push(`/allblog`);
+    } else {
+      router.push(`/allblog?search=${query}`);
+    }
+  }, [query]);
   return (
     <div className="flex items-center justify-center gap-4">
       <div className="">
         <input
           type="text"
           className="input input-bordered  md:w-[400px] "
+          value={text}
           placeholder="search a blog"
-          onChange={(e) => {
-            handleSearch(e.target.value);
-          }}
-          defaultValue={searchParams.get("query")?.toString()}
+          onChange={(e) => setText(e.target.value)}
         />
       </div>
       <div className="join space-x-3">
