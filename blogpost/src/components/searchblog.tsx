@@ -1,6 +1,5 @@
 "use client";
-import React, { useState } from "react";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import React from "react";
 import Link from "next/link";
 
 export default function Searchblog({ totalpage }: any) {

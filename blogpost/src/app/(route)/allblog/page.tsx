@@ -2,7 +2,6 @@ import Searchblog from "@/components/searchblog";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import React from "react";
-// import Searchblog from "../../components/searchblog";
 
 async function getPosts(page: number) {
   const totalCount = await db.post.count();
@@ -31,7 +30,6 @@ export default async function Blog({
 
   const posts = await getPosts(par);
   const pagesCount = Math.ceil(posts.totalCount / 6);
-  console.log(pagesCount, "COUNTT");
   const renderPost = posts?.response?.map(({ id, title, description, tag }) => {
     return (
       <div className="card w-80 md:w-96 bg-base-100 shadow-xl " key={id}>
