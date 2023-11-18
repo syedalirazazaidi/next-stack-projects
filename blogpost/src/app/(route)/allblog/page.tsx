@@ -36,9 +36,8 @@ export default async function Blog({
   [key: string]: string | string[] | undefined | any;
 }) {
   const par = parseInt(searchParams?.page ?? 1);
-  const search = searchParams.search ?? "";
+  const search = searchParams?.search ?? "";
 
-  console.log(searchParams, "%^%^%^%^%^");
   const posts = await getPosts(par, search);
   const pagesCount = Math.ceil(posts.totalCount / 6);
   const renderPost = posts?.response?.map(({ id, title, description, tag }) => {
