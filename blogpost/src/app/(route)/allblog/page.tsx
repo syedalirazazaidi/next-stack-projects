@@ -27,6 +27,7 @@ export default async function Blog({
   [key: string]: string | string[] | undefined | any;
 }) {
   const par = parseInt(searchParams?.page ?? 1);
+  const query = searchParams?.query || "";
 
   const posts = await getPosts(par);
   const pagesCount = Math.ceil(posts.totalCount / 6);
